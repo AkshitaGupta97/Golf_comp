@@ -1,15 +1,17 @@
-import Navbar from './page/Navbar'
-import Home from './page/Home'
+import { useEffect, useState } from "react";
+import WelcomeScreen from "./components/WelcomeScreen";
+import Home from "./pages/Home";
 
 function App() {
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <Navbar />
-      <main className="mx-auto max-w-7xl px-6 pb-16 pt-8 md:px-8">
-        <Home />
-      </main>
-    </div>
-  )
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
+
+  return <>{loading ? <WelcomeScreen /> : <Home />}</>;
 }
 
 export default App
