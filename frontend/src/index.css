@@ -3,6 +3,66 @@
 :root {
   color-scheme: dark;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --surface: #111827;
+  --surface-strong: #0f172a;
+  --muted: #94a3b8;
+  --border: #1f2937;
+  --accent: #38bdf8;
+  --accent-strong: #22d3ee;
+  --surface-rgb: 17, 24, 39;
+  --text-rgb: 226, 232, 240;
+  --muted-rgb: 148, 163, 184;
+  --accent-rgb: 56, 189, 248;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --surface: #ffffff;
+  --surface-strong: #f1f5f9;
+  --muted: #64748b;
+  --border: #cbd5e1;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --surface-rgb: 255, 255, 255;
+  --text-rgb: 15, 23, 42;
+  --muted-rgb: 100, 116, 139;
+  --accent-rgb: 37, 99, 235;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --surface: #111827;
+  --surface-strong: #0f172a;
+  --muted: #94a3b8;
+  --border: #1f2937;
+  --accent: #38bdf8;
+  --accent-strong: #22d3ee;
+  --surface-rgb: 17, 24, 39;
+  --text-rgb: 226, 232, 240;
+  --muted-rgb: 148, 163, 184;
+  --accent-rgb: 56, 189, 248;
+}
+
+[data-theme="cyber"] {
+  color-scheme: dark;
+  --bg: #05071c;
+  --text: #e0f4ff;
+  --surface: #08103d;
+  --surface-strong: #0f1e45;
+  --muted: #94a7d0;
+  --border: #23335a;
+  --accent: #8b5cf6;
+  --accent-strong: #7c3aed;
+  --surface-rgb: 8, 16, 61;
+  --text-rgb: 224, 244, 255;
+  --muted-rgb: 148, 167, 208;
+  --accent-rgb: 139, 92, 246;
 }
 
 html,
@@ -13,6 +73,9 @@ body,
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button {
@@ -30,3 +93,32 @@ button {
   white-space: nowrap;
   border: 0;
 }
+
+@layer utilities {
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  .bg-surface-strong {
+    background-color: var(--surface-strong);
+  }
+  .text-primary {
+    color: var(--text);
+  }
+  .text-muted {
+    color: var(--muted);
+  }
+  .text-accent {
+    color: var(--accent);
+  }
+  .border-surface {
+    border-color: var(--border);
+  }
+  .bg-surface-soft {
+    background-color: rgba(var(--surface-rgb), 0.06);
+  }
+  .placeholder-muted::placeholder {
+    color: var(--muted);
+    opacity: 1;
+  }
+}
+
