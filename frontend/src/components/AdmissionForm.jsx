@@ -10,6 +10,7 @@ const AdmissionForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const courses = [
     "Paramedical",
@@ -48,7 +49,20 @@ const AdmissionForm = () => {
     event.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-    setSubmitted(Object.keys(validationErrors).length === 0);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setSubmitted(false);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitted(false);
+
+    // Simulate async submission.
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 1000);
   };
 
   return (
@@ -57,7 +71,7 @@ const AdmissionForm = () => {
         <p className="mb-3 inline-flex rounded-full border border-[rgba(var(--accent-rgb),0.30)] bg-[rgba(var(--accent-rgb),0.08)] px-4 py-2 text-sm font-semibold uppercase tracking-[0.32em] text-[var(--accent)]">
           Admissions
         </p>
-        <h2 className="text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
+        <h2 className="text-3xl font-semibold tracking-tight text-(--text) sm:text-4xl">
           Start your application today
         </h2>
       </div>
@@ -65,11 +79,11 @@ const AdmissionForm = () => {
       <div>
         <form
           onSubmit={handleSubmit}
-          className="rounded-4xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_40px_120px_rgba(15,23,42,0.35)] sm:p-8"
+          className="rounded-4xl border border-(--border) bg-(--surface) p-6 shadow-[0_40px_120px_rgba(15,23,42,0.35)] sm:p-8"
           noValidate
         >
           <div className="grid gap-6 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm text-[var(--text)]">
+            <label className="grid gap-2 text-sm text-(--text)">
               Full Name
               <input
                 name="name"
@@ -77,13 +91,13 @@ const AdmissionForm = () => {
                 onChange={handleChange}
                 type="text"
                 placeholder="Enter your full name"
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text)] placeholder-muted focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
+                className="rounded-3xl border border-(--border) bg-(--surface-strong) px-4 py-3 text-(--text) placeholder-muted focus:border-(--accent) focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
                 required
               />
               {errors.name && <span className="text-sm text-rose-400">{errors.name}</span>}
             </label>
 
-            <label className="grid gap-2 text-sm text-[var(--text)]">
+            <label className="grid gap-2 text-sm text-(--text)">
               Email Address
               <input
                 name="email"
@@ -91,7 +105,7 @@ const AdmissionForm = () => {
                 onChange={handleChange}
                 type="email"
                 placeholder="example@mail.com"
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text)] placeholder-muted focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
+                className="rounded-3xl border border-(--border) bg-(--surface-strong) px-4 py-3 text-(--text) placeholder-muted focus:border-(--accent) focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
                 required
               />
               {errors.email && <span className="text-sm text-rose-400">{errors.email}</span>}
@@ -99,7 +113,7 @@ const AdmissionForm = () => {
           </div>
 
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm text-[var(--text)]">
+            <label className="grid gap-2 text-sm text-(--text)">
               Phone Number
               <input
                 name="phone"
@@ -107,13 +121,13 @@ const AdmissionForm = () => {
                 onChange={handleChange}
                 type="tel"
                 placeholder="+91 98765 43210"
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text)] placeholder-muted focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
+                className="rounded-3xl border border-(--border) bg-(--surface-strong) px-4 py-3 text-(--text) placeholder-muted focus:border-(--accent) focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
                 required
               />
               {errors.phone && <span className="text-sm text-rose-400">{errors.phone}</span>}
             </label>
 
-            <label className="grid gap-2 text-sm text-[var(--text)]">
+            <label className="grid gap-2 text-sm text-(--text)">
               City
               <input
                 name="city"
@@ -121,23 +135,23 @@ const AdmissionForm = () => {
                 onChange={handleChange}
                 type="text"
                 placeholder="City name"
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text)] placeholder-muted focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
+                className="rounded-3xl border border-(--border) bg-(--surface-strong) px-4 py-3 text-(--text) placeholder-muted focus:border-(--accent) focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
                 required
               />
               {errors.city && <span className="text-sm text-rose-400">{errors.city}</span>}
             </label>
           </div>
 
-          <label className="mt-6 grid gap-2 text-sm text-[var(--text)]">
+          <label className="mt-6 grid gap-2 text-sm text-(--text)">
             Course Selection
             <select
               name="course"
               value={values.course}
               onChange={handleChange}
-              className="rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
+              className="rounded-3xl border border-(--border) bg-(--surface-strong) px-4 py-3 text-(--text) focus:border-(--accent) focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.20)]"
             >
               {courses.map((courseOption) => (
-                <option key={courseOption} value={courseOption} className="bg-[var(--surface-strong)] text-[var(--text)]">
+                <option key={courseOption} value={courseOption} className="bg-(--surface-strong) text-(--text)">
                   {courseOption}
                 </option>
               ))}
@@ -146,13 +160,14 @@ const AdmissionForm = () => {
 
           <button
             type="submit"
-            className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--surface)] transition hover:bg-[var(--accent-strong)] focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.30)]"
+            disabled={isSubmitting}
+            className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-(--accent) px-6 py-3 text-sm font-semibold text-(--surface) transition focus:outline-none focus:ring-2 focus:ring-[rgba(var(--accent-rgb),0.30)] disabled:cursor-not-allowed disabled:opacity-60 hover:bg-[var(--accent-strong)]"
           >
-            Submit Application
+            {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>
 
           {submitted && (
-            <div className="mt-6 rounded-3xl border border-[rgba(var(--accent-rgb),0.20)] bg-[rgba(var(--accent-rgb),0.12)] px-5 py-4 text-sm text-[var(--accent)]">
+            <div className="mt-6 rounded-3xl border border-[rgba(var(--accent-rgb),0.20)] bg-[rgba(var(--accent-rgb),0.12)] px-5 py-4 text-sm text-(--accent)">
               Your application details are ready. Our admissions team will contact you soon.
             </div>
           )}
