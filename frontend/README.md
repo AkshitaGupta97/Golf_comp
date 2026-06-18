@@ -76,7 +76,7 @@ frontend/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/AkshitaGupta97/Golf_comp/tree/main/frontend
    cd frontend
    ```
 
